@@ -31,7 +31,7 @@
             <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
             <a class="dropdown-item">
               <div class="item-thumbnail">
-                  <img src="admin/images/faces/face4.jpg" alt="image" class="profile-pic">
+                  <img src="{{ asset('admin/images/faces/face4.jpg') }}" alt="image" class="profile-pic">
               </div>
               <div class="item-content flex-grow">
                 <h6 class="ellipsis font-weight-normal">David Grey
@@ -43,7 +43,7 @@
             </a>
             <a class="dropdown-item">
               <div class="item-thumbnail">
-                  <img src="admin/images/faces/face2.jpg" alt="image" class="profile-pic">
+                  <img src="{{ asset('admin/images/faces/face2.jpg') }}" alt="image" class="profile-pic">
               </div>
               <div class="item-content flex-grow">
                 <h6 class="ellipsis font-weight-normal">Tim Cook
@@ -55,7 +55,7 @@
             </a>
             <a class="dropdown-item">
               <div class="item-thumbnail">
-                  <img src="admin/images/faces/face3.jpg" alt="image" class="profile-pic">
+                  <img src="{{ asset('admin/images/faces/face3.jpg') }}" alt="image" class="profile-pic">
               </div>
               <div class="item-content flex-grow">
                 <h6 class="ellipsis font-weight-normal"> Johnson
@@ -117,7 +117,7 @@
         </li>
         <li class="nav-item nav-profile dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-            <img src="admin/images/faces/face5.jpg" alt="profile"/>
+            <img src="{{ asset('admin/images/faces/face5.jpg') }}" alt="profile"/>
             <span class="nav-profile-name">Louis Barnett</span>
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
@@ -125,10 +125,18 @@
               <i class="mdi mdi-settings text-primary"></i>
               Settings
             </a>
-            <a class="dropdown-item">
+            
+            <a class="dropdown-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
               <i class="mdi mdi-logout text-primary"></i>
-              Logout
-            </a>
+
+             {{ __('Logout') }}
+         </a>
+
+         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+             @csrf
+         </form>
           </div>
         </li>
       </ul>
