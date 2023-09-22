@@ -13,13 +13,8 @@
                 <h2>{{session('message')}}</h2>
            @endif
                
-                <p class="mb-md-0">Your analytics dashboard template.</p>
               </div>
-              <div class="d-flex">
-                <i class="mdi mdi-home text-muted hover-cursor"></i>
-                <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
-                <p class="text-primary mb-0 hover-cursor">Analytics</p>
-              </div>
+           
             </div>
             <div class="d-flex justify-content-between align-items-end flex-wrap">
               <button type="button" class="btn btn-light bg-white btn-icon me-3 d-none d-md-block ">
@@ -35,6 +30,60 @@
             </div>
           </div>
         </div>
+        <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Category Table</h4>
+                 
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>
+                            ID
+                          </th>
+                          <th>
+                            Name
+                          </th>
+                          <th>
+                            Status
+                          </th>
+                          <th>
+                            Actions
+                          </th>
+                       
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($categories as $category)
+                        <tr>
+                          <td class="py-1">
+                            {{ $category->id }}
+                          </td>
+                          <td>
+                            {{ $category->name }}
+                          </td>
+                          <td>
+                            <div class="py-1">
+                              {{ $category->status ==1  ? 'hidden' :'visible' }}
+                            </div>
+                          </td>
+                          <td>
+                          <a href="{{ url('admin/category/'. $category->id . '/edit', []) }}" class="btn btn-primary">Edit</a>
+                          <a href="{{ url('admin/category/'. $category->id .'/delete', []) }}" onclick="return  confirm('Bạn có chắc chắn muốn xóa category?')"  class="btn btn-danger">Delete</a>
+                          </td>
+                       
+                        </tr>
+                    @endforeach
+                       
+                  
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
       </div>
    
     </div>

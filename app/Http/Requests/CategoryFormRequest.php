@@ -51,10 +51,7 @@ class CategoryFormRequest extends FormRequest
                 'required',
                 'string'
             ],
-            'status' => [
-                'required',
-                'string'
-            ],
+
         ];
     }
 }

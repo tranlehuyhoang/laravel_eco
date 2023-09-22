@@ -29,7 +29,13 @@ Auth::routes();
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
-    Route::get('category', [CategoryController::class, 'index']);
-    Route::get('category/create', [CategoryController::class, 'create']);
-    Route::post('category', [CategoryController::class, 'store'])->name('create_category');
+
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('category',   'getAllCategories');
+        Route::get('category/create',  'create');
+        Route::get('category/{category}/edit',  'edit');
+        Route::post('category', 'store')->name('create_category');
+        Route::put('category/{category}', 'update')->name('edit_category');
+        Route::get('category/{category}/delete', 'destroy');
+    });
 });
