@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,5 +38,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('category', 'store')->name('create_category');
         Route::put('category/{category}', 'update')->name('edit_category');
         Route::get('category/{category}/delete', 'destroy');
+    });
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('/brand', 'index');
+        Route::post('/brand', 'store')->name('brand.create');
+        Route::put('brand/{brand}', 'update')->name('edit_category');
+        Route::get('brand/{brand}/delete', 'destroy');
     });
 });

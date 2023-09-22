@@ -20,6 +20,12 @@
         </div>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{ url('admin/brand', []) }}">
+          <i class="mdi mdi-source-branch menu-icon"></i>
+          <span class="menu-title">Brand</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="pages/forms/basic_elements.html">
           <i class="mdi mdi-view-headline menu-icon"></i>
           <span class="menu-title">Form elements</span>
