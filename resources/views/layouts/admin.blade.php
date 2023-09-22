@@ -35,7 +35,7 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  ') }}
+   
   <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
