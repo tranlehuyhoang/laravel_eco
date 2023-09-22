@@ -40,4 +40,21 @@ class BrandController extends Controller
 
         return redirect('admin/brand')->with('message', 'brand Deleted Successfully');
     }
+    public function update(BrandFormRequest $request, $brand)
+    {
+        $brand = Brand::findOrFail($brand);
+        $validatedData = $request->validate($request->rules());
+
+        $validatedData = $request->validate($request->rules());
+
+
+        $brand->name = $validatedData['name'];
+        $brand->slug = $validatedData['slug'];
+
+        $brand->status = $request->status ? '1' : '0';
+        $brand->save();
+
+
+        return redirect('admin/brand')->with('message', 'brand Added Successfully');
+    }
 }

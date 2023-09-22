@@ -42,7 +42,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::controller(BrandController::class)->group(function () {
         Route::get('/brand', 'index');
         Route::post('/brand', 'store')->name('brand.create');
-        Route::put('brand/{brand}', 'update')->name('edit_category');
+        Route::put('brand/{brand}', 'update')->name('brand.update');
         Route::get('brand/{brand}/delete', 'destroy');
     });
 });

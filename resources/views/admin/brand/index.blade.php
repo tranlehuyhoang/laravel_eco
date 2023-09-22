@@ -74,7 +74,7 @@
                             </div>
                           </td>
                           <td>
-                          <a href="{{ url('admin/brand/'. $brand->id . '/edit', []) }}" class="btn btn-primary">Edit</a>
+                          <a href="{{ url('admin/brand/'. $brand->id . '/edit', []) }}" data-toggle="modal" data-target="#UpdateModal{{$brand->id}}" class="btn btn-primary">Edit</a>
                           <a href="{{ url('admin/brand/'. $brand->id .'/delete', []) }}" onclick="return  confirm('Bạn có chắc chắn muốn xóa brand?')"  class="btn btn-danger">Delete</a>
                           </td>
                        
@@ -105,6 +105,54 @@
 
 
 <!-- Modal -->
+@foreach($brands as $brand)
+<div class="modal fade" id="UpdateModal{{$brand->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+ 
+  <form action="{{ url('admin/brand/'.$brand->id ) }}" method="POST">
+@csrf
+@method('PUT')
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content"> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Brand</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Name</label> 
+            <input type="text" name="name" class="form-control" value="{{$brand->name}}" id="exampleInputEmail1" aria-describedby="emailHelp" >
+            @error('name')
+            <small class="text-danger">{{$message}}</small>
+        @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Slug</label> 
+            <input type="text" class="form-control" name="slug" value="{{$brand->slug}}" id="exampleInputEmail1" aria-describedby="emailHelp" >
+            @error('slug')
+            <small class="text-danger">{{$message}}</small>
+        @enderror
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Status</label> <input type="checkbox" {{$brand->status == '1'? 'checked':''}} name="status"/>
+          </div>
+        
+
+           
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit"  class="btn btn-primary" value="Update">
+      </div>
+      
+    </div>
+  </div>
+</form>
+ 
+</div>
+@endforeach
+
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
  
   <form action="{{ route('brand.create') }}" method="POST">
