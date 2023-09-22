@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +46,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('/brand', 'store')->name('brand.create');
         Route::put('brand/{brand}', 'update')->name('brand.update');
         Route::get('brand/{brand}/delete', 'destroy');
+    });
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('product', 'index');
+        Route::get('product/create', 'create');
+        Route::post('product', 'store')->name('product.create');
     });
 });

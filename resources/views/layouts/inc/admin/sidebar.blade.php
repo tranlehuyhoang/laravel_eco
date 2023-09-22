@@ -14,16 +14,39 @@
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{ url('admin/category', []) }}">Category</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{ url('admin/category/create', []) }}">Category Add</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('admin/category') }}">Category</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('admin/category/create') }}">Category Add</a>
+            </li>
           </ul>
         </div>
       </li>
+      
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('admin/brand', []) }}">
+        <a class="nav-link" href="{{ url('admin/brand') }}">
           <i class="mdi mdi-source-branch menu-icon"></i>
           <span class="menu-title">Brand</span>
         </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#product" aria-expanded="false" aria-controls="product">
+          <i class="mdi mdi-circle-outline menu-icon"></i>
+          <span class="menu-title">Product</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="product">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('admin/product') }}">Product</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('admin/product/create') }}">Product Add</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="pages/forms/basic_elements.html">
