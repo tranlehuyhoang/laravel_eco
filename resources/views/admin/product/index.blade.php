@@ -32,8 +32,8 @@
         </div>
         <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
-                <div class="card-body"> 
-                  <h4 class="card-title">Product Table</h4>
+                <div class="card-body">
+                  <h4 class="card-title">Products Table</h4>
                  
                   <div class="table-responsive">
                     <table class="table table-striped">
@@ -43,21 +43,51 @@
                             ID
                           </th>
                           <th>
-                            Name
+                            Category
+                          </th>
+                          <th>
+                            Selling Price
+                          </th>
+                          <th>
+                            Quantity
                           </th>
                           <th>
                             Status
                           </th>
                           <th>
-                            Actions
+                            Action
                           </th>
                        
                         </tr>
                       </thead>
                       <tbody>
-                  
+                        @foreach($products as $product)
+                        <tr>
+                          <td class="py-1">
+                            {{ $product->id }}
+                          </td>
+                          <td>
+                            {{ $product->category->name }}
+                          </td>
+                          <td class="py-1">
+                            {{ $product->selling_price }}
+                          </td>
+                          <td class="py-1">
+                            {{ $product->quantity }}
+                          </td>
+                          <td>
+                            <div class="py-1">
+                              {{ $product->status ==1  ? 'hidden' :'visible' }}
+                            </div>
+                          </td>
+                          <td>
+                          <a href="{{ url('admin/product/'. $product->id . '/edit', []) }}" class="btn btn-primary">Edit</a>
+                          <a href="{{ url('admin/product/'. $product->id .'/delete', []) }}" onclick="return  confirm('Bạn có chắc chắn muốn xóa category?')"  class="btn btn-danger">Delete</a>
+                          </td>
                        
-                  
+                        </tr>
+                    @endforeach
+                                      
                       </tbody>
                     </table>
                   </div>

@@ -50,6 +50,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('product', 'index');
         Route::get('product/create', 'create');
+        Route::get('product/{product}/edit',  'edit');
+
         Route::post('product', 'store')->name('product.create');
+        Route::put('product/{product}', 'update');
+        Route::get('product-image/{product_image_id}/delete', 'destroyImg');
+        Route::get('product/{product}/delete', 'destroy');
     });
 });
