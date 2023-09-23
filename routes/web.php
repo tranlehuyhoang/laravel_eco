@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Models\Product;
@@ -56,5 +57,15 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::put('product/{product}', 'update');
         Route::get('product-image/{product_image_id}/delete', 'destroyImg');
         Route::get('product/{product}/delete', 'destroy');
+    });
+    Route::controller(ColorController::class)->group(function () {
+        Route::get('color', 'index');
+        Route::get('color/create', 'create');
+        Route::post('color', 'store');
+
+        Route::get('color/{color}/edit',  'edit');
+        Route::put('color/{color}', 'update');
+
+        Route::get('color/{color}/delete', 'destroy');
     });
 });
