@@ -46,6 +46,9 @@
                         <li class="nav-item" role="presentation">
                           <button class="nav-link" id="home1-tab" data-bs-toggle="tab" data-bs-target="#home1" type="button" role="tab" aria-controls="home1" aria-selected="false">Product Image</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="home2-tab" data-bs-toggle="tab" data-bs-target="#home2" type="button" role="tab" aria-controls="home2" aria-selected="false">Product Color</button>
+                        </li>
                       </ul>
                       <form action="{{ url('admin/product') }}" class="forms-sample" enctype="multipart/form-data" method="POST">
                         @csrf
@@ -164,6 +167,21 @@
                             <div class="form-group mt-3">
                                 <label for="image"> Product Images</label>
                                 <input type="file" multiple class="form-control" name="image[]" id="image" > 
+                              </div>
+                        
+                        </div>
+                        <div class="tab-pane fade " id="home2" role="tabpanel" aria-labelledby="home2-tab">
+
+                            <div class="form-group mt-3">
+                                <label for="colors"> Product Color</label>
+                                @foreach ($colors as $color)
+                                    <br>
+                              
+                                <input value="{{$color->id}}" type="checkbox" style="background-color: {{$color->code}}"  name="colors[{{$color->id}}]" id="colors{{$color->id}}" > 
+                                <label style=" color: {{$color->code}}" for="colors{{$color->id}}">  <span style="  color: {{$color->code}} ;background-color: {{$color->code}}" >COLOR</span></label>
+                                <label   for="colorquantity[{{$color->id}}]">quantity</span></label>
+                                <input  type="number"    name="colorquantity[{{$color->id}}]" id="colorquantity[{{$color->id}}]" > 
+                                @endforeach
                               </div>
                         
                         </div>
