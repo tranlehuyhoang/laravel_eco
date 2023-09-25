@@ -57,6 +57,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::put('product/{product}', 'update');
         Route::get('product-image/{product_image_id}/delete', 'destroyImg');
         Route::get('product/{product}/delete', 'destroy');
+        Route::post('product-color/{prd_color_id}', 'updateProductColorQty');
+        Route::post('product-color/{prd_color_id}/delete', 'deleteProductColorButon');
     });
     Route::controller(ColorController::class)->group(function () {
         Route::get('color', 'index');

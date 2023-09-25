@@ -45,6 +45,9 @@
                         <li class="nav-item" role="presentation">
                           <button class="nav-link" id="home1-tab" data-bs-toggle="tab" data-bs-target="#home1" type="button" role="tab" aria-controls="home1" aria-selected="false">Product Image</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="home2-tab" data-bs-toggle="tab" data-bs-target="#home2" type="button" role="tab" aria-controls="home2" aria-selected="false">Product Color</button>
+                        </li>
                       </ul>
                       <form action="{{ url('admin/product/'. $product->id .'') }}" class="forms-sample" enctype="multipart/form-data" method="POST">
                         @csrf
@@ -181,9 +184,78 @@
                               </div>
                         
                         </div>
+                        <div class="tab-pane fade " id="home2" role="tabpanel" aria-labelledby="home2-tab">
+
+                          <div class="form-group mt-3">
+                              <label for="colors"> Product Color</label>
+                              @foreach ($colors as $color)
+                                  <br>
+                            
+                              <input value="{{$color->id}}" type="checkbox" style="background-color: {{$color->code}}"  name="colors[{{$color->id}}]" id="colors{{$color->id}}" > 
+                              <label style=" color: {{$color->code}}" for="colors{{$color->id}}">  <span style="  color: {{$color->code}} ;background-color: {{$color->code}}" >COLOR</span></label>
+                              <label   for="colorquantity[{{$color->id}}]">quantity</span></label>
+                              <input  type="number"    name="colorquantity[{{$color->id}}]" id="colorquantity[{{$color->id}}]" > 
+                              @endforeach
+                            </div>
+                            <div class="card-body">
+                              <h4 class="card-title">Brand Table</h4>
+                             
+                              <div class="table-responsive">
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                    
+                                      <th>
+                                        Color Name
+                                      </th>
+                                      <th>
+                                        quantity
+                                      </th>
+                                      <th>
+                                        Actions
+                                      </th>
+                                   
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    @if ($product->productColor )
+                                    @foreach ($product->productColor as $pdcolor)
+                                        
+                                    <tr class="prd_qty">
+       
+              <td style="background: {{$pdcolor->color->code}}; color:{{$pdcolor->color->code}}">
+                color
+              </td>
+              <td>
+             <input type="number" class=" productColorQuantity{{$pdcolor->id}}" value="{{$pdcolor->quantity}}"> 
+              </td>
+         
+              <td>
+              <button type="button" value="{{$pdcolor->id}}"  class=" updateProductColorButon btn btn-primary">Update</button>
+              <button  type="button" value="{{$pdcolor->id}} " class="deleteProductColorButon btn btn-danger">Delete</button>
+              </td>
+           
+            </tr>
+                                    @endforeach
+                                    @else
+                                    <tr>
+                            <td colspan="3">
+  
+  Color Not Found
+</td>
+                                    </tr>
+                                    @endif
+                                    
+                                                       
+                                                  
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                      </div>
                         
                     </div>
-                    <button   class="btn btn-primary me-2  text-while">Update</button>
+                    <button  type="submit" class="btn btn-primary me-2  text-while">Update</button>
                     <button class="btn btn-light">Cancel</button>
                 </form>
                 </div>
@@ -203,4 +275,64 @@
     </footer>
     <!-- partial -->
   </div>
+ @section('script');
+ <script>
+  $(document).ready(function () {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    $(document).on('click', '.updateProductColorButon', function () {
+      var prd_color_id = $(this).val();
+      var product_id = '{{$product->id}}';
+      var qty = $('.productColorQuantity' + prd_color_id).val();
+      console.log(product_id, qty, prd_color_id);
+
+      var data = {
+        'product_id': product_id,
+        'qty': qty,
+      };
+
+      $.ajax({
+        type: "POST",
+        url: "/admin/product-color/" + prd_color_id,
+        data: data,
+        dataType: "json", // Specify the data type expected in the response
+        success: function (response) {
+          alert(response.message);
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.responseText); // Log the error response
+        }
+      });
+    });
+    $(document).on('click', '.deleteProductColorButon', function () {
+      var prd_color_id = $(this).val();
+    
+      var product_id = '{{$product->id}}';
+
+    
+      var data = {
+        'product_id': product_id,
+         
+      };
+
+      $.ajax({
+        type: "POST",
+        url: "/admin/product-color/" + prd_color_id + '/delete',
+        data: data,
+        dataType: "json", // Specify the data type expected in the response
+        success: function (response) {
+          alert(response.message);
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.responseText); // Log the error response
+        }
+      });
+    });
+  });
+</script>
+ @endsection
 @endsection
