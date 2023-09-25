@@ -77,7 +77,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('slider', 'store');
 
         Route::get('slider/{slider}/edit',  'edit');
-        // Route::put('slider/{slider}', 'update');
+        Route::put('slider/{slider}', 'update');
 
         Route::get('slider/{slider}/delete', 'destroy');
     });
